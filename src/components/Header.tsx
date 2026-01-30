@@ -1,55 +1,89 @@
-import { Zap, Github, BookOpen } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Zap, Github, BookOpen, GraduationCap } from 'lucide-react';
 
 /**
  * Header - Intestazione dell'app ErrorFlow.
  */
 export function Header() {
   return (
-    <header className="relative border-b border-border/50 bg-card/50 backdrop-blur-sm">
-      {/* Subtle gradient line */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+    <motion.header 
+      className="relative border-b border-border/50 bg-card/80 backdrop-blur-md sticky top-0 z-50"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
+      {/* Animated gradient line */}
+      <motion.div 
+        className="absolute bottom-0 left-0 right-0 h-px"
+        style={{
+          background: "linear-gradient(90deg, transparent, hsl(180 100% 50% / 0.5), transparent)"
+        }}
+        animate={{
+          backgroundPosition: ["200% 0", "-200% 0"]
+        }}
+        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+      />
 
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="relative">
-              <div className="absolute inset-0 bg-primary/30 blur-lg" />
-              <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/50 flex items-center justify-center">
-                <Zap className="w-5 h-5 text-primary-foreground" />
+          <motion.div 
+            className="flex items-center gap-3"
+            whileHover={{ scale: 1.02 }}
+          >
+            <motion.div 
+              className="relative"
+              whileHover={{ rotate: 360 }}
+              transition={{ duration: 0.5 }}
+            >
+              <motion.div 
+                className="absolute inset-0 bg-primary/40 blur-lg"
+                animate={{ 
+                  scale: [1, 1.3, 1],
+                  opacity: [0.5, 0.8, 0.5]
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+              <div className="relative w-11 h-11 rounded-xl bg-gradient-to-br from-primary via-primary to-accent flex items-center justify-center shadow-lg">
+                <Zap className="w-6 h-6 text-primary-foreground" />
               </div>
-            </div>
+            </motion.div>
             <div>
               <h1 className="text-xl font-bold text-gradient-cyan">
                 ErrorFlow
               </h1>
-              <p className="text-xs text-muted-foreground">
-                Impara a gestire gli errori
+              <p className="text-xs text-muted-foreground flex items-center gap-1">
+                <GraduationCap className="w-3 h-3" />
+                Tutorial Interattivo
               </p>
             </div>
-          </div>
+          </motion.div>
 
           {/* Navigation */}
-          <nav className="flex items-center gap-4">
-            <a
+          <nav className="flex items-center gap-2">
+            <motion.a
               href="#learn"
-              className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
               <BookOpen className="w-4 h-4" />
               <span className="hidden sm:inline">Guida</span>
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
               <Github className="w-4 h-4" />
               <span className="hidden sm:inline">GitHub</span>
-            </a>
+            </motion.a>
           </nav>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }
