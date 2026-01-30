@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Zap, Github, BookOpen, GraduationCap } from 'lucide-react';
+import { Zap, BookOpen, GraduationCap } from 'lucide-react';
 
 /**
  * Header - Intestazione dell'app ErrorFlow.
@@ -69,17 +69,6 @@ export function Header() {
             >
               <BookOpen className="w-4 h-4" />
               <span className="hidden sm:inline">Guida</span>
-            </motion.a>
-            <motion.a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Github className="w-4 h-4" />
-              <span className="hidden sm:inline">GitHub</span>
             </motion.a>
           </nav>
         </div>
