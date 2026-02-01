@@ -1,10 +1,15 @@
 import { motion } from 'framer-motion';
-import { Zap, BookOpen, GraduationCap } from 'lucide-react';
+import { Zap, BookOpen, GraduationCap, LogOut } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+
+interface HeaderProps {
+  onLogout?: () => void;
+}
 
 /**
  * Header - Intestazione dell'app ErrorFlow.
  */
-export function Header() {
+export function Header({ onLogout }: HeaderProps) {
   return (
     <motion.header 
       className="relative border-b border-border/50 bg-card/80 backdrop-blur-md sticky top-0 z-50"
@@ -70,6 +75,23 @@ export function Header() {
               <BookOpen className="w-4 h-4" />
               <span className="hidden sm:inline">Guida</span>
             </motion.a>
+            
+            {onLogout && (
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={onLogout}
+                  className="flex items-center gap-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span className="hidden sm:inline">Esci</span>
+                </Button>
+              </motion.div>
+            )}
           </nav>
         </div>
       </div>
