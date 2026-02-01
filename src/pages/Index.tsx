@@ -30,24 +30,8 @@ const Index = () => {
   const [toast, setToast] = useState<AppError | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
 
-  // Mostra schermata di caricamento
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full"
-        />
-      </div>
-    );
-  }
-
-  // Mostra pagina di login se non autenticato
-  if (!authenticated) {
-    return <LoginPage onLogin={login} />;
-  }
-
+  // IMPORTANTE: Tutti gli hook devono essere definiti PRIMA di qualsiasi return condizionale
+  // Questa è una regola fondamentale di React (Rules of Hooks)
   const handleGenerateError = useCallback((category: ErrorCategory) => {
     setIsGenerating(true);
     
@@ -74,6 +58,24 @@ const Index = () => {
   const handleCloseToast = useCallback(() => {
     setToast(null);
   }, []);
+
+  // Mostra schermata di caricamento
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full"
+        />
+      </div>
+    );
+  }
+
+  // Mostra pagina di login se non autenticato
+  if (!authenticated) {
+    return <LoginPage onLogin={login} />;
+  }
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
