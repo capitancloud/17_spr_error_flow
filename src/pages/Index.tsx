@@ -2,6 +2,8 @@ import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { AppError, ErrorCategory } from '@/types/errors';
 import { generateError } from '@/lib/errorGenerator';
+import { useAuth } from '@/hooks/useAuth';
+import { LoginPage } from '@/components/LoginPage';
 import { Header } from '@/components/Header';
 import { HeroIntro } from '@/components/HeroIntro';
 import { HttpCodeExplainer } from '@/components/HttpCodeExplainer';
@@ -22,10 +24,29 @@ import { Sparkles } from 'lucide-react';
  * 3. L'impatto sulla UX di diversi tipi di errori
  */
 const Index = () => {
+  const { authenticated, isLoading, login, logout } = useAuth();
   const [errors, setErrors] = useState<AppError[]>([]);
   const [selectedError, setSelectedError] = useState<AppError | null>(null);
   const [toast, setToast] = useState<AppError | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+
+  // Mostra schermata di caricamento
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full"
+        />
+      </div>
+    );
+  }
+
+  // Mostra pagina di login se non autenticato
+  if (!authenticated) {
+    return <LoginPage onLogin={login} />;
+  }
 
   const handleGenerateError = useCallback((category: ErrorCategory) => {
     setIsGenerating(true);
@@ -82,7 +103,7 @@ const Index = () => {
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      <Header />
+      <Header onLogout={logout} />
 
       <main className="container mx-auto px-4 py-8 relative z-10">
         {/* Hero intro for beginners */}
