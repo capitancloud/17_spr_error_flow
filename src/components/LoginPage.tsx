@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Zap, Lock, Eye, EyeOff, AlertCircle, Shield, KeyRound } from 'lucide-react';
+import { Lock, Eye, EyeOff, AlertCircle, Shield, KeyRound } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import superProgrammatoreLogo from '@/assets/super-programmatore-logo.png';
 
 interface LoginPageProps {
   onLogin: (code: string) => Promise<boolean>;
@@ -73,24 +74,18 @@ export function LoginPage({ onLogin }: LoginPageProps) {
       >
         <Card className={`bg-card/90 backdrop-blur-xl border-border/50 shadow-2xl ${shake ? 'animate-shake' : ''}`}>
           <CardHeader className="text-center space-y-4">
-            {/* Logo animato */}
+            {/* Logo Super Programmatore */}
             <motion.div 
-              className="mx-auto relative"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
+              className="mx-auto"
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
               transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
             >
-              <motion.div 
-                className="absolute inset-0 bg-primary/40 blur-xl rounded-full"
-                animate={{ 
-                  scale: [1, 1.4, 1],
-                  opacity: [0.5, 0.8, 0.5]
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
+              <img 
+                src={superProgrammatoreLogo} 
+                alt="Super Programmatore" 
+                className="w-48 h-auto mx-auto drop-shadow-lg"
               />
-              <div className="relative w-16 h-16 rounded-2xl bg-gradient-to-br from-primary via-primary to-accent flex items-center justify-center shadow-lg">
-                <Zap className="w-8 h-8 text-primary-foreground" />
-              </div>
             </motion.div>
 
             <div>
