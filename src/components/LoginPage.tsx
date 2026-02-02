@@ -178,19 +178,6 @@ export function LoginPage({ onLogin }: LoginPageProps) {
               </Button>
             </form>
 
-            {/* Nota didattica */}
-            <motion.div 
-              className="mt-6 p-4 rounded-lg bg-muted/30 border border-border/30"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-            >
-              <p className="text-xs text-muted-foreground text-center">
-                <span className="text-primary font-medium">💡 Nota Didattica:</span> Questo sistema usa
-                un hash SHA-256 per verificare il codice senza memorizzarlo in chiaro.
-                In produzione, la verifica avverrebbe lato server.
-              </p>
-            </motion.div>
           </CardContent>
         </Card>
 
